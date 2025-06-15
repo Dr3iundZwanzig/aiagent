@@ -1,14 +1,40 @@
 import os
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
+import sys
 
-load_dotenv()
-api_key = os.environ.get("GEMINI_API_KEY")
+def main():
 
-client = genai.Client(api_key=api_key)
+    load_dotenv()
+    api_key = os.environ.get("GEMINI_API_KEY")
 
-call = client.models.generate_content(model="gemini-2.0-flash-001", contents="Why is Boot.dev such great place to learn backend developmen? Use one paragraph maximum.")
+    client = genai.Client(api_key=api_key)
 
-print(call.text)
-print(call.usage_metadata.prompt_token_count)
-print(call.usage_metadata.candidates_token_count)
+    prompt = sys.argv[1:]
+
+    messages =[
+        types.Content(role="user", parts=[types.Part(text=prompt)]),
+    ]
+
+    call = client.models.generate_content(
+        model="gemini-2.0-flash-001",
+        contents=messages,
+    )
+
+    
+    
+    print(call.text)
+    print(f"Prompt tokens: {call.usage_metadata.prompt_token_count}")
+    print(f"Response tokens: {call.usage_metadata.candidates_token_count}")
+    
+
+
+
+
+try:
+    if __name__ == "__main__":
+        main()
+except Exception:
+    print("Usage: python3 main.py <PROMPT>")
+    sys.exit(1)
