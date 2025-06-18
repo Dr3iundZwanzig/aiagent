@@ -1,3 +1,6 @@
 venv/
 .env
 __pycache__/
+tests.py
+calculator/lorem.txt
+calculator/pkg/morelorem.txt
