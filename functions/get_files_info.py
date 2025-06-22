@@ -10,7 +10,7 @@ def get_files_info(working_directory, directory=None):
             finall_directory = os.path.abspath(os.path.join(working_directory_ap, directory))
         isdir = os.path.isdir(finall_directory)
     except Exception as e:
-        return f'Error: {e}'
+        return f'Error: get_files_info {e}'
     
     if not finall_directory.startswith(working_directory_ap):
         return f'Error: Cannot list "{directory_ap}" as it is outside the permitted working directory'
