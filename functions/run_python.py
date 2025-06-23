@@ -31,9 +31,9 @@ def run_python_file(working_directory, file_path):
         )
         output = []
         if run.stdout:
-            output.append(f"STDOUT:\n{run.stdout}")
+            output.append(f"STDOUT:\n {run.stdout}")
         if run.stderr:
-            output.append(f"STDERR:\n{run.stderr}")
+            output.append(f"STDERR:\n {run.stderr}")
         if run.returncode != 0:
             output.append(f"Process exited with code {run.returncode}")
         return "\n".join(output) if output else "No output produced."

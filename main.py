@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 from call_function import available_functions
+from functions.call_function import call_function
 import sys
 
 def main():
@@ -61,8 +62,17 @@ def main():
         print(f"Prompt tokens: {prompt_tokens}")
         print(f"Response tokens: {response_tokens}")
 
-    for function_call_part in call.function_calls:
-        print(f"Calling function: {function_call_part.name}({function_call_part.args})")
+    result = call_function(call.function_calls,verbose)
+    
+    if not result.parts[0].function_response.response:
+        raise Exception("Fatal error no function return")
+    if verbose:
+        print(f"-> {result.parts[0].function_response.response}")
+
+    raise Exception("Error: no returns")
+    
+    
+    
 
 
     
