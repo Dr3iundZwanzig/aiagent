@@ -5,3 +5,5 @@ tests.py
 calculator/lorem.txt
 calculator/pkg/morelorem.txt
 calculator/README.md
+.python-version
+pyproject.toml
